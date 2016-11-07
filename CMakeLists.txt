@@ -10,6 +10,7 @@ STRING(REGEX REPLACE "\\\\" "/" ENV_HOME_DIR $ENV{HOME})
 
 # Add custom modules
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/findcmake")
+set(CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/lib")
 
 # Set base directories
 set(CPP_SRC_DIR "src/cpp")
@@ -18,6 +19,10 @@ set(OPENCL_SRC_DIR "src/opencl")
 
 # Add manual libs
 list (APPEND INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/lib/include")
+
+# TBB
+set(ENV{TBB_ARCH_PLATFORM} "intel64/vc14")
+set(TBB_ROOT_DIR "${ENV_HOME_DIR}/Bin/tbb2017_20161004oss")
 
 ##------------------------------------------------------------------------------
 ## Dependencies
@@ -66,8 +71,8 @@ set(SOURCES
   )
 
 set(OPENGL_SRC
-  ${OPENCL_SRC_DIR}/fractal.vs
-  ${OPENCL_SRC_DIR}/fractal.fs
+  ${OPENGL_SRC_DIR}/fractal.vs
+  ${OPENGL_SRC_DIR}/fractal.fs
   )
 
 set(OPENCL_SRC
@@ -75,6 +80,7 @@ set(OPENCL_SRC
   )
 
 if(MSVC)
+  list(APPEND SOURCES ${OPENGL_SRC})
   list(APPEND SOURCES ${OPENCL_SRC})
 endif()
 

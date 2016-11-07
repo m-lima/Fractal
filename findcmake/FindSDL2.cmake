@@ -37,36 +37,39 @@
 find_package(PkgConfig QUIET)
 pkg_check_modules(PC_SDL2 QUIET sdl2)
 
-find_path(SDL2_INCLUDE_DIR
+find_path(
+  SDL2_INCLUDE_DIR
   NAMES SDL.h
   HINTS
-    ${PC_SDL2_INCLUDEDIR}
-    ${PC_SDL2_INCLUDE_DIRS}
-  PATH_SUFFIXES SDL2
-)
+  ${PC_SDL2_INCLUDEDIR}
+  ${PC_SDL2_INCLUDE_DIRS}
+  PATH_SUFFIXES SDL2/include
+  )
 
-find_library(SDL2_LIBRARY
+find_library(
+  SDL2_LIBRARY
   NAMES SDL2
   HINTS
-    ${PC_SDL2_LIBDIR}
-    ${PC_SDL2_LIBRARY_DIRS}
-  PATH_SUFFIXES x64 x86
-)
+  ${PC_SDL2_LIBDIR}
+  ${PC_SDL2_LIBRARY_DIRS}
+  PATH_SUFFIXES SDL2/bin
+  )
 
 if(NOT SDL2_BUILDING_LIBRARY)
-  find_library(SDL2MAIN_LIBRARY
+  find_library(
+    SDL2MAIN_LIBRARY
     NAMES SDL2main
     HINTS
-      ${PC_SDL2_LIBDIR}
-      ${PC_SDL2_LIBRARY_DIRS}
-    PATH_SUFFIXES x64 x86
-  )
+    ${PC_SDL2_LIBDIR}
+    ${PC_SDL2_LIBRARY_DIRS}
+    PATH_SUFFIXES SDL2/bin
+    )
 endif()
 
 if(NOT SDL2MAIN_LIBRARY)
-    set(SDL2MAIN_FOUND FALSE)
+  set(SDL2MAIN_FOUND FALSE)
 else()
-    set(SDLMAIN_FOUND TRUE)
+  set(SDLMAIN_FOUND TRUE)
 endif()
 
 if(SDL2_INCLUDE_DIR AND EXISTS "${SDL2_INCLUDE_DIR}/SDL_version.h")
@@ -88,16 +91,18 @@ endif()
 set(SDL2_INCLUDE_DIRS ${SDL2_INCLUDE_DIR})
 
 if(SDL2MAIN_FOUND)
-    set(SDL2_LIBRARIES ${SDL2MAIN_LIBRARY} ${SDL2_LIBRARY})
+  set(SDL2_LIBRARIES ${SDL2MAIN_LIBRARY} ${SDL2_LIBRARY})
 else()
-    set(SDL2_LIBRARIES ${SDL2_LIBRARY})
+  set(SDL2_LIBRARIES ${SDL2_LIBRARY})
 endif()
 
 include(FindPackageHandleStandardArgs)
 
-find_package_handle_standard_args(SDL2
-                                  REQUIRED_VARS SDL2_INCLUDE_DIR SDL2_LIBRARY
-                                  VERSION_VAR SDL2_VERSION_STRING)
+find_package_handle_standard_args(
+  SDL2
+  REQUIRED_VARS SDL2_INCLUDE_DIR SDL2_LIBRARY
+  VERSION_VAR SDL2_VERSION_STRING
+  )
 
 mark_as_advanced(SDL2_INCLUDE_DIR SDL2_LIBRARY)
 
