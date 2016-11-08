@@ -22,7 +22,7 @@ list (APPEND INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/lib/include")
 
 # TBB
 set(ENV{TBB_ARCH_PLATFORM} "intel64/vc14")
-set(TBB_ROOT_DIR "${ENV_HOME_DIR}/Bin/tbb2017_20161004oss")
+set(TBB_ROOT_DIR "${ENV_HOME_DIR}/Lib/tbb2017_20161004oss")
 
 ##------------------------------------------------------------------------------
 ## Dependencies
@@ -68,6 +68,8 @@ message(STATUS "TBB Libraries: " "${TBB_LIBRARIES}")
 
 set(SOURCES
   ${CPP_SRC_DIR}/main.cpp
+  ${CPP_SRC_DIR}/renderer.cpp
+  ${CPP_SRC_DIR}/renderer.hpp
   )
 
 set(OPENGL_SRC
