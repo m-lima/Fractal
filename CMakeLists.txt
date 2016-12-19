@@ -11,6 +11,7 @@ STRING(REGEX REPLACE "\\\\" "/" ENV_HOME_DIR $ENV{HOME})
 # Add custom modules
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/findcmake")
 set(CMAKE_PREFIX_PATH "${CMAKE_SOURCE_DIR}/lib")
+set(CMAKE_PREFIX_PATH "${ENV_HOME_DIR}/Lib")
 
 # Set base directories
 set(CPP_SRC_DIR "src/cpp")
@@ -19,10 +20,6 @@ set(OPENCL_SRC_DIR "src/opencl")
 
 # Add manual libs
 list (APPEND INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/lib/include")
-
-# TBB
-set(ENV{TBB_ARCH_PLATFORM} "intel64/vc14")
-set(TBB_ROOT_DIR "${ENV_HOME_DIR}/Lib/tbb2017_20161004oss")
 
 ##------------------------------------------------------------------------------
 ## Dependencies
@@ -40,9 +37,11 @@ list(APPEND LIBRARIES ${OpenCL_LIBRARIES})
 message(STATUS "OpenCL Include: " "${OpenCL_INCLUDE_DIR}")
 message(STATUS "OpenCL Libraries: " "${OpenCL_LIBRARIES}")
 
+# SDL2
+# set(SDL_INCLUDE_DIR "${ENV_HOME_DIR}/Lib/SDL2/SDL2-2.0.5")
 find_package(SDL2 REQUIRED)
 list(APPEND INCLUDE_DIRS ${SDL2_INCLUDE_DIRS})
-list(APPEND LIBRARIES ${SDL2_LIBRARIES})
+list(APPEND LIBRARIES ${SDL2_LIBRARY})
 message(STATUS "SDL2 Include: " "${SDL2_INCLUDE_DIRS}")
 message(STATUS "SDL2 Libraries: " "${SDL2_LIBRARIES}")
 
@@ -50,11 +49,15 @@ add_subdirectory(fmt)
 list(APPEND INCLUDE_DIRS fmt)
 list(APPEND LIBRARIES fmt)
 
-find_package(TBB REQUIRED)
-list(APPEND INCLUDE_DIRS ${TBB_INCLUDE_DIRS})
-list(APPEND LIBRARIES ${TBB_LIBRARIES})
-message(STATUS "TBB Include: " "${TBB_INCLUDE_DIRS}")
-message(STATUS "TBB Libraries: " "${TBB_LIBRARIES}")
+# TBB
+# set(ENV{TBB_ARCH_PLATFORM} "intel64/vc14")
+# set(TBB_ROOT_DIR "${ENV_HOME_DIR}/Lib/TBB")
+
+# find_package(TBB REQUIRED)
+# list(APPEND INCLUDE_DIRS ${TBB_INCLUDE_DIRS})
+# list(APPEND LIBRARIES ${TBB_LIBRARIES})
+# message(STATUS "TBB Include: " "${TBB_INCLUDE_DIRS}")
+# message(STATUS "TBB Libraries: " "${TBB_LIBRARIES}")
 
 ##------------------------------------------------------------------------------
 ## LAS

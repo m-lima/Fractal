@@ -1,29 +1,23 @@
 #ifndef FRACTAL_RENDERER_HPP
 #define FRACTAL_RENDERER_HPP
 
-namespace Fractal {
+#include <memory>
+
+namespace fractal {
   class Renderer {
   public:
-    static Renderer & instance() {
-      static Renderer _instance;
-      return _instance;
-    }
-
-    //static const std::shared_ptr<Renderer> instancePtr() {
-    //  static const std::shared_ptr<Renderer> _instancePtr = std::make_shared<Renderer>(instance());
-    //  return _instancePtr;
-    //}
+    static const std::shared_ptr<Renderer> instance();
 
     Renderer(const Renderer & renderer) = delete;
     Renderer(const Renderer && renderer) = delete;
     void operator=(const Renderer & renderer) = delete;
     void operator=(const Renderer && renderer) = delete;
 
-    void initialize();
   private:
-    Renderer() {}
-
+    Renderer();
   };
 };
+
+using RendererPtr = std::shared_ptr<fractal::Renderer>;
 
 #endif // !FRACTAL_RENDERER_HPP
