@@ -1,4 +1,3 @@
-#include <SDL.h>
 #include <fmt/ostream.h>
 
 #include "renderer.hpp"
@@ -29,8 +28,7 @@ namespace fractal {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
-    // Set VSync true
-    SDL_GL_SetSwapInterval(1);
+    SDL_GL_SetSwapInterval(0);
   }
 
 }

@@ -1,4 +1,7 @@
-#include "renderer.hpp"
+#include <QApplication>
+#include <QDesktopWidget>
+
+#include "mainWindow.hpp"
 
 #ifdef _WIN32
 // Force high performance GPU
@@ -11,17 +14,45 @@ extern "C" {
 }
 #endif
 
-using namespace fractal;
+void center(QWidget & widget) {
+  int x, y;
+  int screenWidth;
+  int screenHeight;
 
-int main() {
+  int WIDTH = widget.width();
+  int HEIGHT = widget.height();
 
-  RendererPtr renderer = fractal::Renderer::instance();
-  renderer->test = 4;
+  QDesktopWidget *desktop = QApplication::desktop();
 
-  RendererPtr renderer2 = fractal::Renderer::instance();
-  renderer->test = 5;
-  renderer2->test = 5;
-  RendererPtr renderer3 = fractal::Renderer::instance();
+  screenWidth = desktop->screen()->width();
+  screenHeight = desktop->screen()->height();
 
-  return 0;
+  x = (screenWidth - WIDTH) / 2;
+  y = (screenHeight - HEIGHT) / 2;
+
+  widget.move(x, y);
+}
+
+#if defined(_WIN32) && defined(NDEBUG)
+int WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, char*, int nShowCmd) {
+  int argc = 0;
+  QApplication app(argc, 0);
+#else
+int main(int argc, char * argv[]) {
+  QApplication app(argc, argv);
+#endif
+
+  app.setApplicationName("Fractal");
+
+  MainWindow mainWindow;
+  mainWindow.resize(1024, 768);
+  center(mainWindow);
+
+#ifdef NDEBUG
+  mainWindow.showFullScreen();
+#else
+  mainWindow.show();
+#endif
+
+  return app.exec();
 }
