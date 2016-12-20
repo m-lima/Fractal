@@ -10,6 +10,9 @@ lib/
 # Netbeans
 nbproject/
 
+# VS 2017
+.vs/
+
 # Data files
 *.las
 
