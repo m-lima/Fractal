@@ -8,8 +8,7 @@ class FractalWidget : public QOpenGLWidget, public QOpenGLFunctions_4_1_Core {
 
 public:
   explicit FractalWidget(QWidget * parent = 0);
-  ~FractalWidget() = default;
-
+  ~FractalWidget();
 
 protected:
   void initializeGL() Q_DECL_OVERRIDE;
