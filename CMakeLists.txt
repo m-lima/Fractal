@@ -40,10 +40,10 @@ list(APPEND LIBRARIES qt)
 
 set(SOURCES
   ${SRC_DIR}/cpp/main.cpp
-  ${SRC_DIR}/cpp/mainWindow.cpp
-  ${SRC_DIR}/cpp/mainWindow.hpp
-  ${SRC_DIR}/cpp/fractalWidget.cpp
-  ${SRC_DIR}/cpp/fractalWidget.hpp
+  ${SRC_DIR}/cpp/main_window.cpp
+  ${SRC_DIR}/cpp/main_window.hpp
+  ${SRC_DIR}/cpp/fractal_widget.cpp
+  ${SRC_DIR}/cpp/fractal_widget.hpp
   ${SRC_DIR}/cpp/shader.cpp
   ${SRC_DIR}/cpp/shader.hpp
   )
