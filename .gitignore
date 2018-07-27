@@ -1,50 +1,25 @@
-# Builds
-build/
-
-# Libraries
-lib/
-
 # Vim
-*.swp
+**/.*.swp
+
+# Idea
+**/.idea
 
 # Netbeans
-nbproject/
+nbproject
 
-# VS 2017
-.vs/
+# QT Creator
+CMakeLists.txt.user
 
-# Data files
-*.las
+# Visual Studio
+.vs
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Build
+build
 
-# Precompiled Headers
-*.gch
-*.pch
+# Output
+lib
+bin
+include
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-*.pdb
-*.ilk
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-
+# External projects
+ext/*/pack
