@@ -1,5 +1,5 @@
-#include "mainWindow.hpp"
-#include "fractalWidget.hpp"
+#include "main_window.hpp"
+#include "fractal_widget.hpp"
 
 MainWindow::MainWindow()
 {

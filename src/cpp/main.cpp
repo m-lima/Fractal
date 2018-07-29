@@ -1,7 +1,7 @@
 #include <QApplication>
 #include <QDesktopWidget>
 
-#include "mainWindow.hpp"
+#include "main_window.hpp"
 
 #ifdef _WIN32
 // Force high performance GPU

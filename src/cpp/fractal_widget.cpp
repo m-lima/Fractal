@@ -1,4 +1,4 @@
-#include "fractalWidget.hpp"
+#include "fractal_widget.hpp"
 
 #include <memory>
 
@@ -87,7 +87,7 @@ void FractalWidget::mouseMoveEvent(QMouseEvent * evt) {
 }
 
 void FractalWidget::wheelEvent(QWheelEvent * evt) {
-  _zoomFallbackCursor = &cursor();
+//  _zoomFallbackCursor = &cursor();
   setCursor(Qt::CrossCursor);
 
   if (evt->delta() > 0) {
@@ -132,10 +132,10 @@ void FractalWidget::paintGL() {
   glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
   glUseProgram(0);
 
-  if (_zoomFallbackCursor != nullptr) {
-    setCursor(*_zoomFallbackCursor);
-    _zoomFallbackCursor = nullptr;
-  }
+//  if (_zoomFallbackCursor != nullptr) {
+//    setCursor(*_zoomFallbackCursor);
+//    _zoomFallbackCursor = nullptr;
+//  }
 }
 
 void FractalWidget::resizeGL(int width, int height) {

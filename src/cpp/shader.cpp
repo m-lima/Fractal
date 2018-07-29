@@ -48,7 +48,7 @@ namespace {
       _gl->glDeleteShader(shader);
 
       fmt::print(stderr, "Failed to compile {}\nLOG: {}", file, log);
-      delete log;
+      delete[] log;
       return 0;
     }
 
