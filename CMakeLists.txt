@@ -16,8 +16,23 @@ include("${EXT_DIR}/mfl/mfl.cmake")
 list(APPEND LIBRARIES mfl)
 
 # QT
-include("${EXT_DIR}/qt/qt.cmake")
-list(APPEND LIBRARIES qt)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTORCC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+find_package(Qt5 COMPONENTS Widgets)
+if (NOT Qt5_FOUND)
+  message(STATUS "Could not find QT5. Adding external project")
+  include(${EXT_DIR}/qt/qt.cmake)
+  find_package(Qt5 COMPONENTS Widgets REQUIRED)
+else ()
+  message(STATUS "Found QT5. Not adding external project")
+endif (NOT Qt5_FOUND)
+list(APPEND LIBRARIES Qt5::Widgets)
+
+#include("${EXT_DIR}/qt/qt.cmake")
+#list(APPEND LIBRARIES qt)
 
 ## QT
 #if (MSVC)
@@ -62,7 +77,7 @@ endif()
 ##
 
 add_executable(fractal ${SOURCES})
-target_link_libraries(fractal PRIVATE mfl qt)
+target_link_libraries(fractal ${LIBRARIES})
 #set_target_properties(fractal PROPERTIES CXX_LANGUAGE_STANDARD 11)
 #target_link_libraries(fractal ${LIBRARIES})
 #target_link_libraries(fractal Qt5::Widgets)

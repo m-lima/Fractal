@@ -1,0 +1,35 @@
+cmake_minimum_required(VERSION 3.2)
+project(qt-download NONE)
+
+include(ExternalProject)
+include(GNUInstallDirs)
+
+ExternalProject_Add(qt-project
+  PREFIX deps/qt
+  URL "https://download.qt.io/official_releases/qt/5.11/5.11.1/submodules/qtbase-everywhere-src-5.11.1.tar.xz"
+  URL_HASH "SHA256=a0d047b2da5782c8332c59ae203984b64e4d5dc5f4ba9c0884fdbe753d0afb46"
+  DOWNLOAD_DIR "${CMAKE_CURRENT_LIST_DIR}/pack/down"
+  SOURCE_DIR "${CMAKE_CURRENT_LIST_DIR}/pack/qt"
+  STAMP_DIR "${CMAKE_CURRENT_LIST_DIR}/pack/tmp/qt"
+  TMP_DIR "${CMAKE_CURRENT_LIST_DIR}/pack/tmp/qt"
+  BUILD_IN_SOURCE 1
+  CONFIGURE_COMMAND "./configure"
+    -prefix "qt"
+    -extprefix "${CMAKE_CURRENT_LIST_DIR}/pack/install"
+    -opensource
+    -confirm-license
+    -release
+    -static
+    -nomake examples
+    -nomake tests
+    -nomake tools
+    -no-feature-concurrent
+    -no-feature-dbus
+    -no-feature-network
+    -no-feature-sql
+    -no-feature-testlib
+    -no-feature-xml
+  BUILD_COMMAND make
+  INSTALL_COMMAND make install
+  )
+
